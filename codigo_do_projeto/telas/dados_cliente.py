@@ -13,7 +13,7 @@ def dados_cliente(cpf):
   Dados = {
       "Nome": "João Silva",
       "CPF": "99999999999",
-      "email": "joao@gmail.com",
+      "Email": "joao@gmail.com",
       "Telefone": "(11) 98765-4321",
       "Endereco": "Rua das Flores, 123",
       "Marca": "Fiat",
@@ -29,15 +29,15 @@ def dados_cliente(cpf):
   }
   def botao_novo_veiculo():
     janeladadosdocliente.destroy()
-    novo_veiculo()
+    novo_veiculo(Dados)
   
   def botao_novo_servico():
     janeladadosdocliente.destroy()
-    novo_servico()
+    novo_servico(Dados)
 
   def botao_alterar():
     janeladadosdocliente.destroy()  # Fecha a janela após gerar a ordem de serviço
-    alterar()
+    alterar(Dados)
 
   janeladadosdocliente = tk.Toplevel()
   janeladadosdocliente.title("Dados do Cliente")
@@ -83,7 +83,7 @@ def dados_cliente(cpf):
   # telefone_entry = ttk.Entry(cliente_frame, width=20)
   # telefone_entry.grid(row=2, column=1, padx=5, pady=5, sticky="ew")
 
-  email_label = ttk.Label(cliente_frame, text="E-mail: " + Dados["email"])
+  email_label = ttk.Label(cliente_frame, text="E-mail: " + Dados["Email"])
   email_label.grid(row=3, column=0, padx=5, pady=5, sticky="w")
   # email_entry = ttk.Entry(cliente_frame, width=30)
   # email_entry.grid(row=3, column=1, padx=5, pady=5, sticky="ew")

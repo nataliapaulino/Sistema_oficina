@@ -3,7 +3,7 @@ from tkinter import ttk
 
 from telas.ordem_servico import ordem_servico
 
-def novo_servico():
+def novo_servico(Dados):
     global janelanovoservico
     janelanovoservico = tk.Tk()
     janelanovoservico.title("Novo Serviço")
@@ -34,64 +34,64 @@ def novo_servico():
     cliente_frame = ttk.LabelFrame(scrollable_frame, text="Dados do Cliente")
     cliente_frame.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
 
-    nome_label = ttk.Label(cliente_frame, text="Nome:")
+    nome_label = ttk.Label(cliente_frame, text="Nome: " + Dados["Nome"])
     nome_label.grid(row=0, column=0, padx=5, pady=5, sticky="w")
-    nome_entry = ttk.Entry(cliente_frame, width=30)
-    nome_entry.grid(row=0, column=1, padx=5, pady=5, sticky="ew")
+    # nome_entry = ttk.Entry(cliente_frame, width=30)
+    # nome_entry.grid(row=0, column=1, padx=5, pady=5, sticky="ew")
 
-    cpf_label = ttk.Label(cliente_frame, text="CPF:")
+    cpf_label = ttk.Label(cliente_frame, text="CPF: " + Dados["CPF"])
     cpf_label.grid(row=1, column=0, padx=5, pady=5, sticky="w")
-    cpf_entry = ttk.Entry(cliente_frame, width=20)
-    cpf_entry.grid(row=1, column=1, padx=5, pady=5, sticky="ew")
+    # cpf_entry = ttk.Entry(cliente_frame, width=20)
+    # cpf_entry.grid(row=1, column=1, padx=5, pady=5, sticky="ew")
 
-    telefone_label = ttk.Label(cliente_frame, text="Telefone:")
+    telefone_label = ttk.Label(cliente_frame, text="Telefone: " + Dados["Telefone"])
     telefone_label.grid(row=2, column=0, padx=5, pady=5, sticky="w")
-    telefone_entry = ttk.Entry(cliente_frame, width=20)
-    telefone_entry.grid(row=2, column=1, padx=5, pady=5, sticky="ew")
+    # telefone_entry = ttk.Entry(cliente_frame, width=20)
+    # telefone_entry.grid(row=2, column=1, padx=5, pady=5, sticky="ew")
 
-    email_label = ttk.Label(cliente_frame, text="E-mail:")
+    email_label = ttk.Label(cliente_frame, text="E-mail: " + Dados["Email"])
     email_label.grid(row=3, column=0, padx=5, pady=5, sticky="w")
-    email_entry = ttk.Entry(cliente_frame, width=30)
-    email_entry.grid(row=3, column=1, padx=5, pady=5, sticky="ew")
+    # email_entry = ttk.Entry(cliente_frame, width=30)
+    # email_entry.grid(row=3, column=1, padx=5, pady=5, sticky="ew")
 
-    endereco_label = ttk.Label(cliente_frame, text="Endereço:")
+    endereco_label = ttk.Label(cliente_frame, text="Endereço: " + Dados["Endereco"])
     endereco_label.grid(row=4, column=0, padx=5, pady=5, sticky="nw")
-    endereco_entry = tk.Text(cliente_frame, height=3, width=30)
-    endereco_entry.grid(row=4, column=1, padx=5, pady=5, sticky="ew")
+    # endereco_entry = tk.Text(cliente_frame, height=3, width=30)
+    # endereco_entry.grid(row=4, column=1, padx=5, pady=5, sticky="ew")
 
     # --- Frame para Dados do Veículo ---
     veiculo_frame = ttk.LabelFrame(scrollable_frame, text="Dados do Veículo")
     veiculo_frame.grid(row=2, column=0, padx=10, pady=10, sticky="nsew")
 
-    marca_label = ttk.Label(veiculo_frame, text="Marca:")
+    marca_label = ttk.Label(veiculo_frame, text="Marca: " + Dados["Marca"])
     marca_label.grid(row=0, column=0, padx=5, pady=5, sticky="w")
-    marca_entry = ttk.Entry(veiculo_frame, width=20)
-    marca_entry.grid(row=0, column=1, padx=5, pady=5, sticky="ew")
+    # marca_entry = ttk.Entry(veiculo_frame, width=20)
+    # marca_entry.grid(row=0, column=1, padx=5, pady=5, sticky="ew")
 
-    placa_label = ttk.Label(veiculo_frame, text="Placa:")
+    placa_label = ttk.Label(veiculo_frame, text="Placa: " + Dados["Placa"])
     placa_label.grid(row=1, column=0, padx=5, pady=5, sticky="w")
-    placa_entry = ttk.Entry(veiculo_frame, width=10)
-    placa_entry.grid(row=1, column=1, padx=5, pady=5, sticky="ew")
+    # placa_entry = ttk.Entry(veiculo_frame, width=10)
+    # placa_entry.grid(row=1, column=1, padx=5, pady=5, sticky="ew")
 
-    chassi_label = ttk.Label(veiculo_frame, text="Chassi:")
+    chassi_label = ttk.Label(veiculo_frame, text="Chassi: " + Dados["Chassi"])
     chassi_label.grid(row=2, column=0, padx=5, pady=5, sticky="w")
-    chassi_entry = ttk.Entry(veiculo_frame, width=30)
-    chassi_entry.grid(row=2, column=1, padx=5, pady=5, sticky="ew")
+    # chassi_entry = ttk.Entry(veiculo_frame, width=30)
+    # chassi_entry.grid(row=2, column=1, padx=5, pady=5, sticky="ew")
 
-    modelo_label = ttk.Label(veiculo_frame, text="Modelo:")
+    modelo_label = ttk.Label(veiculo_frame, text="Modelo: " + Dados["Modelo"])
     modelo_label.grid(row=3, column=0, padx=5, pady=5, sticky="w")
-    modelo_entry = ttk.Entry(veiculo_frame, width=20)
-    modelo_entry.grid(row=3, column=1, padx=5, pady=5, sticky="ew")
+    # modelo_entry = ttk.Entry(veiculo_frame, width=20)
+    # modelo_entry.grid(row=3, column=1, padx=5, pady=5, sticky="ew")
 
-    ano_fabricacao_label = ttk.Label(veiculo_frame, text="Ano de Fabricação:")
+    ano_fabricacao_label = ttk.Label(veiculo_frame, text="Ano de Fabricação: " + Dados["Ano"])
     ano_fabricacao_label.grid(row=4, column=0, padx=5, pady=5, sticky="w")
-    ano_fabricacao_entry = ttk.Entry(veiculo_frame, width=10)
-    ano_fabricacao_entry.grid(row=4, column=1, padx=5, pady=5, sticky="ew")
+    # ano_fabricacao_entry = ttk.Entry(veiculo_frame, width=10)
+    # ano_fabricacao_entry.grid(row=4, column=1, padx=5, pady=5, sticky="ew")
 
-    cor_label = ttk.Label(veiculo_frame, text="Cor:")
+    cor_label = ttk.Label(veiculo_frame, text="Cor: " + Dados["Cor"])
     cor_label.grid(row=5, column=0, padx=5, pady=5, sticky="w")
-    cor_entry = ttk.Entry(veiculo_frame, width=15)
-    cor_entry.grid(row=5, column=1, padx=5, pady=5, sticky="ew")
+    # cor_entry = ttk.Entry(veiculo_frame, width=15)
+    # cor_entry.grid(row=5, column=1, padx=5, pady=5, sticky="ew")
 
     # --- Frame para Serviço ---
     servico_frame = ttk.LabelFrame(scrollable_frame, text="Serviço")
@@ -123,7 +123,7 @@ def novo_servico():
     alterar_button = ttk.Button(scrollable_frame, text="Gerar Ordem de Serviço", command=botao_gerar_os)
     alterar_button.grid(row=5, column=0, padx=10, pady=10, sticky="ew")
 
-    novo_veiculo_button = ttk.Button(scrollable_frame, text="Cancelar")
+    novo_veiculo_button = ttk.Button(scrollable_frame, text="Cancelar", command=janelanovoservico.destroy)
     novo_veiculo_button.grid(row=6, column=0, padx=10, pady=10, sticky="ew")
 
 
