@@ -4,6 +4,7 @@ from tkinter import ttk
 # from buscar_dados_no_bd import buscar_dados_no_bd
 from telas.novo_veiculo import novo_veiculo
 from telas.novo_servico import novo_servico
+from telas.alterar import alterar
 
 
 def dados_cliente(cpf):
@@ -33,6 +34,10 @@ def dados_cliente(cpf):
   def botao_novo_servico():
     janeladadosdocliente.destroy()
     novo_servico()
+
+  def botao_alterar():
+    janeladadosdocliente.destroy()  # Fecha a janela após gerar a ordem de serviço
+    alterar()
 
   janeladadosdocliente = tk.Toplevel()
   janeladadosdocliente.title("Dados do Cliente")
@@ -149,7 +154,7 @@ def dados_cliente(cpf):
   # forma_pagamento_combo.set(forma_pagamento_opcoes[0]) # Define um valor padrão
 
   # --- Botões Adicionais ---
-  alterar_button = ttk.Button(scrollable_frame, text="Alterar")
+  alterar_button = ttk.Button(scrollable_frame, text="Alterar", command=botao_alterar)
   alterar_button.grid(row=5, column=0, padx=10, pady=10, sticky="ew")
 
   novo_veiculo_button = ttk.Button(scrollable_frame, text="Novo Veículo", command=botao_novo_veiculo)
