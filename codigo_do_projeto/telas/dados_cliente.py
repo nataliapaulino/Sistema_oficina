@@ -2,8 +2,11 @@ import tkinter as tk
 from tkinter import ttk
 
 # from buscar_dados_no_bd import buscar_dados_no_bd
+from telas.novo_veiculo import novo_veiculo
+from telas.novo_servico import novo_servico
 
-def abrir_tela_dados_do_cliente(cpf):
+
+def dados_cliente(cpf):
 
   # buscar_dados_no_bd(cpf) # Função que vai pegar os dados no banco de dados e retornar um objeto chamado dados
   Dados = {
@@ -23,8 +26,13 @@ def abrir_tela_dados_do_cliente(cpf):
       "Observacoes": "Cliente trouxe o carro para revisão.",
       "FormaPagamento": "Dinheiro"
   }
-
-
+  def botao_novo_veiculo():
+    janeladadosdocliente.destroy()
+    novo_veiculo()
+  
+  def botao_novo_servico():
+    janeladadosdocliente.destroy()
+    novo_servico()
 
   janeladadosdocliente = tk.Toplevel()
   janeladadosdocliente.title("Dados do Cliente")
@@ -144,10 +152,10 @@ def abrir_tela_dados_do_cliente(cpf):
   alterar_button = ttk.Button(scrollable_frame, text="Alterar")
   alterar_button.grid(row=5, column=0, padx=10, pady=10, sticky="ew")
 
-  novo_veiculo_button = ttk.Button(scrollable_frame, text="Novo Veículo")
+  novo_veiculo_button = ttk.Button(scrollable_frame, text="Novo Veículo", command=botao_novo_veiculo)
   novo_veiculo_button.grid(row=6, column=0, padx=10, pady=10, sticky="ew")
 
-  novo_servico_button = ttk.Button(scrollable_frame, text="Novo Serviço")
+  novo_servico_button = ttk.Button(scrollable_frame, text="Novo Serviço", command=botao_novo_servico)
   novo_servico_button.grid(row=7, column=0, padx=10, pady=10, sticky="ew")
 
   # Configura o gerenciamento de layout para redimensionamento da coluna principal
@@ -158,3 +166,8 @@ def abrir_tela_dados_do_cliente(cpf):
   cliente_frame.columnconfigure(1, weight=1)
   veiculo_frame.columnconfigure(1, weight=1)
   servico_frame.columnconfigure(1, weight=1)
+  
+
+
+
+  

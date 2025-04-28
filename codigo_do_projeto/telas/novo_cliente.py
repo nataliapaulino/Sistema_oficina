@@ -2,7 +2,9 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 
-def abrir_tela_cadastrar_novo_cliente():
+from telas.ordem_servico import ordem_servico
+
+def novo_cliente():
   # Cria a janela principal
   global janelacadastro
   janelacadastro = tk.Tk()
@@ -120,7 +122,7 @@ def abrir_tela_cadastrar_novo_cliente():
   forma_pagamento_combo.set(forma_pagamento_opcoes[0]) # Define um valor padrão
 
   # --- Botões Adicionais ---
-  alterar_button = ttk.Button(scrollable_frame, text="Gerar Ordem de Serviço", command=gerar_ordem_servico)
+  alterar_button = ttk.Button(scrollable_frame, text="Gerar Ordem de Serviço", command=botao_gerar_os)
   alterar_button.grid(row=5, column=0, padx=10, pady=10, sticky="ew")
 
 
@@ -134,9 +136,6 @@ def abrir_tela_cadastrar_novo_cliente():
   veiculo_frame.columnconfigure(1, weight=1)
   servico_frame.columnconfigure(1, weight=1)
 
-def gerar_ordem_servico():
-    # Aqui você pode implementar a lógica para gerar a ordem de serviço
-    # Por exemplo, coletar dados dos campos e salvar em um banco de dados
+def botao_gerar_os():
     janelacadastro.destroy()  # Fecha a janela após gerar a ordem de serviço
-    messagebox.showwarning("Sucesso", "Ordem de serviço gerada com sucesso!")
-    
+    ordem_servico()
