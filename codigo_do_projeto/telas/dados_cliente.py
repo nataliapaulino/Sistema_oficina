@@ -73,7 +73,7 @@ def dados_cliente(cpf):
   # nome_entry = ttk.Entry(cliente_frame, width=30)
   # nome_entry.grid(row=0, column=1, padx=5, pady=5, sticky="ew")
 
-  cpf_label = ttk.Label(cliente_frame, text="CPF: " + cpf)
+  cpf_label = ttk.Label(cliente_frame, text="CPF: " + Dados["CPF"])
   cpf_label.grid(row=1, column=0, padx=5, pady=5, sticky="w")
   # cpf_entry = ttk.Entry(cliente_frame, width=20)
   # cpf_entry.grid(row=1, column=1, padx=5, pady=5, sticky="ew")

@@ -4,6 +4,43 @@ from tkinter import ttk
 from telas.ordem_servico import ordem_servico
 
 def novo_veiculo(Dados):
+
+  def botao_gerar_os():
+    nome = Dados["Nome"]
+    cpf = Dados["CPF"]
+    email = Dados["Email"]
+    telefone = Dados["Telefone"]
+    endereco = Dados["Endereco"]
+    marca = marca_entry.get()
+    modelo = modelo_entry.get()
+    placa = placa_entry.get()
+    chassi = chassi_entry.get()
+    ano = ano_fabricacao_entry.get()
+    cor = cor_entry.get()
+    servico = servico_entry.get("1.0", tk.END).strip()
+    data_hora = data_hora_atendimento_entry.get()
+    observacoes = observacoes_entry.get("1.0", tk.END).strip()
+    forma_pagamento = forma_pagamento_combo.get()
+    Dadosgerados = {
+      "Nome": nome,
+      "CPF": cpf,
+      "Email": email,
+      "Telefone": telefone,
+      "Endereco": endereco,
+      "Marca": marca,
+      "Modelo": modelo,
+      "Placa": placa,
+      "Chassi": chassi,
+      "Ano": ano,
+      "Cor": cor,
+      "Servico": servico,
+      "DataHora": data_hora,
+      "Observacoes": observacoes,
+      "FormaPagamento": forma_pagamento
+  }
+    janelanovoveiculo.destroy()  # Fecha a janela após gerar a ordem de serviço
+    ordem_servico(Dadosgerados)
+
   global janelanovoveiculo
   janelanovoveiculo = tk.Tk()
   janelanovoveiculo.title("Novo Veículo")
@@ -120,12 +157,9 @@ def novo_veiculo(Dados):
   forma_pagamento_combo.grid(row=4, column=1, padx=5, pady=5, sticky="ew")
   forma_pagamento_combo.set(forma_pagamento_opcoes[0]) # Define um valor padrão
 
-  alterar_button = ttk.Button(scrollable_frame, text="Gerar Ordem de Serviço", command=botao_gerar_os)
+  alterar_button = ttk.Button(scrollable_frame, text="Salvar", command=botao_gerar_os)
   alterar_button.grid(row=5, column=0, padx=10, pady=10, sticky="ew")
 
   novo_veiculo_button = ttk.Button(scrollable_frame, text="Cancelar", command=janelanovoveiculo.destroy)
   novo_veiculo_button.grid(row=6, column=0, padx=10, pady=10, sticky="ew")
 
-def botao_gerar_os():
-    janelanovoveiculo.destroy()  # Fecha a janela após gerar a ordem de serviço
-    ordem_servico()

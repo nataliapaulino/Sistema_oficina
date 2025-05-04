@@ -5,6 +5,43 @@ from tkinter import messagebox
 from telas.ordem_servico import ordem_servico
 
 def novo_cliente():
+  
+  def botao_gerar_os():
+    nome = nome_entry.get()
+    cpf = cpf_entry.get()
+    email = email_entry.get()
+    telefone = telefone_entry.get()
+    endereco = endereco_entry.get("1.0", tk.END).strip()
+    marca = marca_entry.get()
+    modelo = modelo_entry.get()
+    placa = placa_entry.get()
+    chassi = chassi_entry.get()
+    ano = ano_fabricacao_entry.get()
+    cor = cor_entry.get()
+    servico = servico_entry.get("1.0", tk.END).strip()
+    data_hora = data_hora_atendimento_entry.get()
+    observacoes = observacoes_entry.get("1.0", tk.END).strip()
+    forma_pagamento = forma_pagamento_combo.get()
+    Dados = {
+      "Nome": nome,
+      "CPF": cpf,
+      "Email": email,
+      "Telefone": telefone,
+      "Endereco": endereco,
+      "Marca": marca,
+      "Modelo": modelo,
+      "Placa": placa,
+      "Chassi": chassi,
+      "Ano": ano,
+      "Cor": cor,
+      "Servico": servico,
+      "DataHora": data_hora,
+      "Observacoes": observacoes,
+      "FormaPagamento": forma_pagamento
+  }
+    janelacadastro.destroy()  # Fecha a janela após gerar a ordem de serviço
+    ordem_servico(Dados)
+
   # Cria a janela principal
   global janelacadastro
   janelacadastro = tk.Tk()
@@ -122,7 +159,7 @@ def novo_cliente():
   forma_pagamento_combo.set(forma_pagamento_opcoes[0]) # Define um valor padrão
 
   # --- Botões Adicionais ---
-  alterar_button = ttk.Button(scrollable_frame, text="Gerar Ordem de Serviço", command=botao_gerar_os)
+  alterar_button = ttk.Button(scrollable_frame, text="Salvar", command=botao_gerar_os)
   alterar_button.grid(row=5, column=0, padx=10, pady=10, sticky="ew")
 
 
@@ -136,6 +173,3 @@ def novo_cliente():
   veiculo_frame.columnconfigure(1, weight=1)
   servico_frame.columnconfigure(1, weight=1)
 
-def botao_gerar_os():
-    janelacadastro.destroy()  # Fecha a janela após gerar a ordem de serviço
-    ordem_servico()

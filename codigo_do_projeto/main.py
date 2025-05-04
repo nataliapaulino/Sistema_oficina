@@ -6,7 +6,6 @@ from tkinter import messagebox
 
 from funcoes_bd.se_cliente_existe import se_cliente_existe
 from telas.dados_cliente import dados_cliente
-
 from telas.novo_cliente import novo_cliente
 
 
