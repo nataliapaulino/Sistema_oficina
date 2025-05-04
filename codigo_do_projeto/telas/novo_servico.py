@@ -4,6 +4,43 @@ from tkinter import ttk
 from telas.ordem_servico import ordem_servico
 
 def novo_servico(Dados):
+    
+    def botao_gerar_os():
+        nome = Dados["Nome"]
+        cpf = Dados["CPF"]
+        email = Dados["Email"]
+        telefone = Dados["Telefone"]
+        endereco = Dados["Endereco"]
+        marca = Dados["Marca"]
+        modelo = Dados["Modelo"]
+        placa = Dados["Placa"]
+        chassi = Dados["Chassi"]
+        ano = Dados["Ano"]
+        cor = Dados["Cor"]
+        servico = servico_entry.get("1.0", tk.END).strip()
+        data_hora = data_hora_atendimento_entry.get()
+        observacoes = observacoes_entry.get("1.0", tk.END).strip()
+        forma_pagamento = forma_pagamento_combo.get()
+        Dadosgerados = {
+        "Nome": nome,
+        "CPF": cpf,
+        "Email": email,
+        "Telefone": telefone,
+        "Endereco": endereco,
+        "Marca": marca,
+        "Modelo": modelo,
+        "Placa": placa,
+        "Chassi": chassi,
+        "Ano": ano,
+        "Cor": cor,
+        "Servico": servico,
+        "DataHora": data_hora,
+        "Observacoes": observacoes,
+        "FormaPagamento": forma_pagamento
+    }
+        janelanovoservico.destroy()  # Fecha a janela após gerar a ordem de serviço
+        ordem_servico(Dadosgerados)
+
     global janelanovoservico
     janelanovoservico = tk.Tk()
     janelanovoservico.title("Novo Serviço")
@@ -120,7 +157,7 @@ def novo_servico(Dados):
     forma_pagamento_combo.set(forma_pagamento_opcoes[0]) # Define um valor padrão
 
     # --- Botões Adicionais ---
-    alterar_button = ttk.Button(scrollable_frame, text="Gerar Ordem de Serviço", command=botao_gerar_os)
+    alterar_button = ttk.Button(scrollable_frame, text="Salvar", command=botao_gerar_os)
     alterar_button.grid(row=5, column=0, padx=10, pady=10, sticky="ew")
 
     novo_veiculo_button = ttk.Button(scrollable_frame, text="Cancelar", command=janelanovoservico.destroy)
@@ -137,7 +174,4 @@ def novo_servico(Dados):
     veiculo_frame.columnconfigure(1, weight=1)
     servico_frame.columnconfigure(1, weight=1)
 
-def botao_gerar_os():
-    janelanovoservico.destroy()  # Fecha a janela após gerar a ordem de serviço
-    ordem_servico()
 
