@@ -1,5 +1,6 @@
 import sqlite3
 import tkinter as tk
+from tkinter import ttk
 from tkinter import messagebox
 
 def tela_cliente():
@@ -117,42 +118,78 @@ def tela_cliente():
     # Interface
     janela = tk.Tk()
     janela.title("Gerenciador de Clientes - Oficina")
-    janela.geometry("600x780")
+    janela.geometry("600x750")
+    janela.configure(bg="#f0f0f0")
 
-    tk.Label(janela, text="ID (automático):").pack()
-    entry_id = tk.Entry(janela, state='readonly'); entry_id.pack()
+    fonte_label = ("Segoe UI", 10, "bold")
+    fonte_entry = ("Segoe UI", 10)
 
-    tk.Label(janela, text="Nome:").pack()
-    entry_nome = tk.Entry(janela); entry_nome.pack()
+    frame_principal = tk.Frame(janela, bg="#ffffff", padx=20, pady=20, bd=2, relief="groove")
+    frame_principal.pack(padx=20, pady=20, fill="both", expand=True)
 
-    tk.Label(janela, text="CPF:").pack()
-    entry_cpf = tk.Entry(janela); entry_cpf.pack()
+    # Campos
+    def adicionar_campo(texto, entry_widget, linha):
+        tk.Label(frame_principal, text=texto, font=fonte_label, bg="#ffffff").grid(row=linha, column=0, sticky="w", pady=5)
+        entry_widget.grid(row=linha, column=1, sticky="ew", pady=5, padx=(10, 0))
 
-    tk.Label(janela, text="Email:").pack()
-    entry_email = tk.Entry(janela); entry_email.pack()
+    entry_id = tk.Entry(frame_principal, state='readonly', font=fonte_entry)
+    entry_nome = tk.Entry(frame_principal, font=fonte_entry)
+    entry_cpf = tk.Entry(frame_principal, font=fonte_entry)
+    entry_email = tk.Entry(frame_principal, font=fonte_entry)
+    entry_telefone = tk.Entry(frame_principal, font=fonte_entry)
+    entry_endereco = tk.Entry(frame_principal, font=fonte_entry)
 
-    tk.Label(janela, text="Telefone:").pack()
-    entry_telefone = tk.Entry(janela); entry_telefone.pack()
+    campos = [
+        ("ID (automático):", entry_id),
+        ("Nome:", entry_nome),
+        ("CPF:", entry_cpf),
+        ("Email:", entry_email),
+        ("Telefone:", entry_telefone),
+        ("Endereço:", entry_endereco)
+    ]
 
-    tk.Label(janela, text="Endereço:").pack()
-    entry_endereco = tk.Entry(janela); entry_endereco.pack()
+    for i, (texto, widget) in enumerate(campos):
+        adicionar_campo(texto, widget, i)
 
-    tk.Button(janela, text="Adicionar", command=adicionar_cliente).pack(pady=5)
-    tk.Button(janela, text="Editar", command=editar_cliente).pack(pady=5)
-    tk.Button(janela, text="Excluir", command=excluir_cliente).pack(pady=5)
+    # Botões principais
+    frame_botoes = tk.Frame(frame_principal, bg="#ffffff")
+    frame_botoes.grid(row=6, column=0, columnspan=2, pady=10)
 
-    tk.Label(janela, text="Clientes:").pack()
-    lista_clientes = tk.Listbox(janela, width=80)
-    lista_clientes.pack()
+    botoes_acao = [
+        ("Adicionar", adicionar_cliente),
+        ("Editar", editar_cliente),
+        ("Excluir", excluir_cliente)
+    ]
+
+    for texto, comando in botoes_acao:
+        tk.Button(frame_botoes, text=texto, width=12, font=fonte_label, bg="#4CAF50", fg="white", command=comando).pack(side="left", padx=5)
+
+    # Lista de clientes
+    tk.Label(frame_principal, text="Clientes:", font=fonte_label, bg="#ffffff").grid(row=7, column=0, sticky="w", pady=(20, 5))
+    lista_clientes = tk.Listbox(frame_principal, width=60, height=8, font=fonte_entry)
+    lista_clientes.grid(row=8, column=0, columnspan=2, sticky="ew")
     lista_clientes.bind('<<ListboxSelect>>', selecionar_cliente)
 
-    tk.Label(janela, text="Buscar por nome:").pack()
-    entry_busca = tk.Entry(janela); entry_busca.pack()
-    tk.Button(janela, text="Buscar", command=buscar_cliente).pack(pady=5)
+    # Campo de busca
+    tk.Label(frame_principal, text="Buscar por nome:", font=fonte_label, bg="#ffffff").grid(row=9, column=0, sticky="w", pady=(20, 5))
+    entry_busca = tk.Entry(frame_principal, font=fonte_entry)
+    entry_busca.grid(row=9, column=1, sticky="ew", pady=(20, 5))
+    tk.Button(frame_principal, text="Buscar", width=10, font=fonte_label, bg="#2196F3", fg="white", command=buscar_cliente).grid(row=10, column=1, sticky="e", pady=5)
 
-    tk.Button(janela, text="Veículo", command=abrir_tela_veiculo).pack(pady=5)
-    tk.Button(janela, text="Serviço", command=abrir_tela_servico).pack(pady=5)
-    tk.Button(janela, text="Pagamento", command=abrir_tela_pagamento).pack(pady=5)
+    # Navegação
+    frame_navegacao = tk.Frame(frame_principal, bg="#ffffff")
+    frame_navegacao.grid(row=11, column=0, columnspan=2, pady=20)
+
+    botoes_nav = [
+        ("Veículo", abrir_tela_veiculo),
+        ("Serviço", abrir_tela_servico),
+        ("Pagamento", abrir_tela_pagamento)
+    ]
+
+    for texto, comando in botoes_nav:
+        tk.Button(frame_navegacao, text=texto, width=12, font=fonte_label, bg="#9C27B0", fg="white", command=comando).pack(side="left", padx=10)
+
+    frame_principal.columnconfigure(1, weight=1)
 
     listar_clientes()
     janela.mainloop()

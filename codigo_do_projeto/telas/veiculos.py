@@ -125,46 +125,77 @@ def tela_veiculo():
     # Interface
     janela = tk.Tk()
     janela.title("Gerenciador de Veículos")
-    janela.geometry("600x780")
+    janela.geometry("600x750")
+    janela.configure(bg="#f0f0f0")
 
-    tk.Label(janela, text="ID (automático):").pack()
-    entry_id = tk.Entry(janela, state='readonly'); entry_id.pack()
+    fonte_label = ("Segoe UI", 10, "bold")
+    fonte_entry = ("Segoe UI", 10)
 
-    tk.Label(janela, text="Cliente:").pack()
+    frame_principal = tk.Frame(janela, bg="#ffffff", padx=20, pady=20, bd=2, relief="groove")
+    frame_principal.pack(padx=20, pady=20, fill="both", expand=True)
+
+    def adicionar_campo(texto, widget, linha):
+        tk.Label(frame_principal, text=texto, font=fonte_label, bg="#ffffff").grid(row=linha, column=0, sticky="w", pady=5)
+        widget.grid(row=linha, column=1, sticky="ew", pady=5, padx=(10, 0))
+
+    # Campos
+    entry_id = tk.Entry(frame_principal, state='readonly', font=fonte_entry)
     cliente_var = tk.StringVar()
-    cliente_menu = tk.OptionMenu(janela, cliente_var, "")
-    cliente_menu.pack()
+    cliente_menu = tk.OptionMenu(frame_principal, cliente_var, "Selecione um cliente")
+    entry_marca = tk.Entry(frame_principal, font=fonte_entry)
+    entry_modelo = tk.Entry(frame_principal, font=fonte_entry)
+    entry_placa = tk.Entry(frame_principal, font=fonte_entry)
+    entry_chassi = tk.Entry(frame_principal, font=fonte_entry)
+    entry_ano = tk.Entry(frame_principal, font=fonte_entry)
+    entry_cor = tk.Entry(frame_principal, font=fonte_entry)
 
-    tk.Label(janela, text="Marca:").pack()
-    entry_marca = tk.Entry(janela); entry_marca.pack()
+    campos = [
+        ("ID (automático):", entry_id),
+        ("Cliente:", cliente_menu),
+        ("Marca:", entry_marca),
+        ("Modelo:", entry_modelo),
+        ("Placa:", entry_placa),
+        ("Chassi:", entry_chassi),
+        ("Ano:", entry_ano),
+        ("Cor:", entry_cor)
+    ]
 
-    tk.Label(janela, text="Modelo:").pack()
-    entry_modelo = tk.Entry(janela); entry_modelo.pack()
+    for i, (texto, widget) in enumerate(campos):
+        adicionar_campo(texto, widget, i)
 
-    tk.Label(janela, text="Placa:").pack()
-    entry_placa = tk.Entry(janela); entry_placa.pack()
+    # Botões principais
+    frame_botoes = tk.Frame(frame_principal, bg="#ffffff")
+    frame_botoes.grid(row=8, column=0, columnspan=2, pady=10)
 
-    tk.Label(janela, text="Chassi:").pack()
-    entry_chassi = tk.Entry(janela); entry_chassi.pack()
+    botoes_acao = [
+        ("Adicionar", adicionar_veiculo),
+        ("Editar", editar_veiculo),
+        ("Excluir", excluir_veiculo)
+    ]
 
-    tk.Label(janela, text="Ano:").pack()
-    entry_ano = tk.Entry(janela); entry_ano.pack()
+    for texto, comando in botoes_acao:
+        tk.Button(frame_botoes, text=texto, width=12, font=fonte_label, bg="#4CAF50", fg="white", command=comando).pack(side="left", padx=5)
 
-    tk.Label(janela, text="Cor:").pack()
-    entry_cor = tk.Entry(janela); entry_cor.pack()
-
-    tk.Button(janela, text="Adicionar", command=adicionar_veiculo).pack(pady=5)
-    tk.Button(janela, text="Editar", command=editar_veiculo).pack(pady=5)
-    tk.Button(janela, text="Excluir", command=excluir_veiculo).pack(pady=5)
-
-    tk.Label(janela, text="Veículos:").pack()
-    lista_veiculos = tk.Listbox(janela, width=100)
-    lista_veiculos.pack()
+    # Lista de veículos
+    tk.Label(frame_principal, text="Veículos:", font=fonte_label, bg="#ffffff").grid(row=9, column=0, sticky="w", pady=(20, 5))
+    lista_veiculos = tk.Listbox(frame_principal, width=60, height=8, font=fonte_entry)
+    lista_veiculos.grid(row=10, column=0, columnspan=2, sticky="ew")
     lista_veiculos.bind('<<ListboxSelect>>', selecionar_veiculo)
 
-    tk.Button(janela, text="Cliente", command=abrir_tela_cliente).pack(pady=5)
-    tk.Button(janela, text="Serviço", command=abrir_tela_servico).pack(pady=5)
-    tk.Button(janela, text="Pagamento", command=abrir_tela_pagamento).pack(pady=5)
+    # Navegação
+    frame_navegacao = tk.Frame(frame_principal, bg="#ffffff")
+    frame_navegacao.grid(row=11, column=0, columnspan=2, pady=20)
+
+    botoes_nav = [
+        ("Cliente", abrir_tela_cliente),
+        ("Serviço", abrir_tela_servico),
+        ("Pagamento", abrir_tela_pagamento)
+    ]
+
+    for texto, comando in botoes_nav:
+        tk.Button(frame_navegacao, text=texto, width=12, font=fonte_label, bg="#9C27B0", fg="white", command=comando).pack(side="left", padx=10)
+
+    frame_principal.columnconfigure(1, weight=1)
 
     listar_clientes_combo()
     listar_veiculos()

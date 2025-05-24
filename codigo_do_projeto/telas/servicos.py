@@ -115,37 +115,71 @@ def tela_servico():
     # Interface
     janela = tk.Tk()
     janela.title("Controle de Serviços")
-    janela.geometry("600x780")
+    janela.geometry("600x750")
+    janela.configure(bg="#f0f0f0")
 
-    tk.Label(janela, text="ID (automático):").pack()
-    entry_id = tk.Entry(janela, state='readonly'); entry_id.pack()
+    fonte_label = ("Segoe UI", 10, "bold")
+    fonte_entry = ("Segoe UI", 10)
 
-    tk.Label(janela, text="Veículo:").pack()
+    frame_principal = tk.Frame(janela, bg="#ffffff", padx=20, pady=20, bd=2, relief="groove")
+    frame_principal.pack(padx=20, pady=20, fill="both", expand=True)
+
+    def adicionar_campo(texto, widget, linha):
+        tk.Label(frame_principal, text=texto, font=fonte_label, bg="#ffffff").grid(row=linha, column=0, sticky="w", pady=5)
+        widget.grid(row=linha, column=1, sticky="ew", pady=5, padx=(10, 0))
+
+    # Campos
+    entry_id = tk.Entry(frame_principal, state='readonly', font=fonte_entry)
     veiculo_var = tk.StringVar()
-    veiculo_menu = tk.OptionMenu(janela, veiculo_var, "")
-    veiculo_menu.pack()
+    veiculo_menu = tk.OptionMenu(frame_principal, veiculo_var, "Selecione um veículo")
+    entry_servico = tk.Entry(frame_principal, font=fonte_entry)
+    entry_data = tk.Entry(frame_principal, font=fonte_entry)
+    entry_obs = tk.Entry(frame_principal, font=fonte_entry)
 
-    tk.Label(janela, text="Serviço realizado:").pack()
-    entry_servico = tk.Entry(janela); entry_servico.pack()
+    campos = [
+        ("ID (automático):", entry_id),
+        ("Veículo:", veiculo_menu),
+        ("Serviço realizado:", entry_servico),
+        ("Data e Hora:", entry_data),
+        ("Observações:", entry_obs)
+    ]
 
-    tk.Label(janela, text="Data e Hora:").pack()
-    entry_data = tk.Entry(janela); entry_data.pack()
+    for i, (texto, widget) in enumerate(campos):
+        adicionar_campo(texto, widget, i)
 
-    tk.Label(janela, text="Observações:").pack()
-    entry_obs = tk.Entry(janela); entry_obs.pack()
+    # Botões principais
+    frame_botoes = tk.Frame(frame_principal, bg="#ffffff")
+    frame_botoes.grid(row=5, column=0, columnspan=2, pady=10)
 
-    tk.Button(janela, text="Adicionar", command=adicionar_servico).pack(pady=5)
-    tk.Button(janela, text="Editar", command=editar_servico).pack(pady=5)
-    tk.Button(janela, text="Excluir", command=excluir_servico).pack(pady=5)
+    botoes_acao = [
+        ("Adicionar", adicionar_servico),
+        ("Editar", editar_servico),
+        ("Excluir", excluir_servico)
+    ]
 
-    tk.Label(janela, text="Serviços registrados:").pack()
-    lista_servicos = tk.Listbox(janela, width=100)
-    lista_servicos.pack()
+    for texto, comando in botoes_acao:
+        tk.Button(frame_botoes, text=texto, width=12, font=fonte_label, bg="#4CAF50", fg="white", command=comando).pack(side="left", padx=5)
+
+    # Lista de serviços
+    tk.Label(frame_principal, text="Serviços registrados:", font=fonte_label, bg="#ffffff").grid(row=6, column=0, sticky="w", pady=(20, 5))
+    lista_servicos = tk.Listbox(frame_principal, width=60, height=8, font=fonte_entry)
+    lista_servicos.grid(row=7, column=0, columnspan=2, sticky="ew")
     lista_servicos.bind('<<ListboxSelect>>', selecionar_servico)
 
-    tk.Button(janela, text="Cliente", command=abrir_tela_cliente).pack(pady=5)
-    tk.Button(janela, text="Veículo", command=abrir_tela_veiculo).pack(pady=5)
-    tk.Button(janela, text="Pagamento", command=abrir_tela_pagamento).pack(pady=5)
+    # Navegação
+    frame_navegacao = tk.Frame(frame_principal, bg="#ffffff")
+    frame_navegacao.grid(row=8, column=0, columnspan=2, pady=20)
+
+    botoes_nav = [
+        ("Cliente", abrir_tela_cliente),
+        ("Veículo", abrir_tela_veiculo),
+        ("Pagamento", abrir_tela_pagamento)
+    ]
+
+    for texto, comando in botoes_nav:
+        tk.Button(frame_navegacao, text=texto, width=12, font=fonte_label, bg="#9C27B0", fg="white", command=comando).pack(side="left", padx=10)
+
+    frame_principal.columnconfigure(1, weight=1)
 
     listar_veiculos_combo()
     listar_servicos()
