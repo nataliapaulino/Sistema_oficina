@@ -4,6 +4,10 @@ from tkinter import messagebox
 
 def tela_cliente():
 
+    from telas.veiculos import tela_veiculo
+    from telas.servicos import tela_servico
+    from telas.pagamento import tela_pagamento
+
     # Banco de dados
     conexao = sqlite3.connect('oficina.db')  # <- nome do banco de dados que será criado
     cursor = conexao.cursor()
@@ -98,10 +102,22 @@ def tela_cliente():
             e.delete(0, tk.END)
         entry_id.config(state='readonly')
 
+    def abrir_tela_veiculo():
+        janela.destroy()
+        tela_veiculo()
+
+    def abrir_tela_servico():
+        janela.destroy()
+        tela_servico()
+    
+    def abrir_tela_pagamento():
+        janela.destroy()
+        tela_pagamento()
+
     # Interface
     janela = tk.Tk()
     janela.title("Gerenciador de Clientes - Oficina")
-    janela.geometry("520x600")
+    janela.geometry("600x780")
 
     tk.Label(janela, text="ID (automático):").pack()
     entry_id = tk.Entry(janela, state='readonly'); entry_id.pack()
@@ -133,6 +149,10 @@ def tela_cliente():
     tk.Label(janela, text="Buscar por nome:").pack()
     entry_busca = tk.Entry(janela); entry_busca.pack()
     tk.Button(janela, text="Buscar", command=buscar_cliente).pack(pady=5)
+
+    tk.Button(janela, text="Veículo", command=abrir_tela_veiculo).pack(pady=5)
+    tk.Button(janela, text="Serviço", command=abrir_tela_servico).pack(pady=5)
+    tk.Button(janela, text="Pagamento", command=abrir_tela_pagamento).pack(pady=5)
 
     listar_clientes()
     janela.mainloop()
