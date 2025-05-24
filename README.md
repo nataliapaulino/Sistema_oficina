@@ -18,10 +18,10 @@ O objetivo é simular o funcionamento básico de uma oficina, com funcionalidade
 
 ## Autores
 
-- Jean Souza [@jeansouza1994](https://github.com/jeansouza1994)
-- Natália Paulino [@nataliapaulino](https://github.com/nataliapaulino)
-- Roberto Rodrigues [@RRAJ1988](https://github.com/RRAJ1988)
-- Victor Cabral [@Victor1050](https://github.com/Victor1050)
+- **Jean Souza** [@jeansouza1994](https://github.com/jeansouza1994)
+- **Natália Paulino** [@nataliapaulino](https://github.com/nataliapaulino)
+- **Roberto Rodrigues** [@RRAJ1988](https://github.com/RRAJ1988)
+- **Victor Cabral** [@Victor1050](https://github.com/Victor1050)
 
 ---
 
