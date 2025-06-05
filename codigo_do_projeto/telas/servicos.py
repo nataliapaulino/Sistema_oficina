@@ -43,19 +43,19 @@ def tela_servico():
 
     def listar_servicos():
         cursor.execute('''
-            SELECT m.id, c.nome, v.modelo, v.placa, m.servico, m.dataHora 
+            SELECT m.id, c.nome, v.modelo, v.placa, m.servico, m.dataHora, m.observacoes
             FROM manutencoes m
             JOIN veiculos v ON m.veiculo_id = v.id
             JOIN clientes c ON v.cliente_id = c.id
         ''')
         lista_servicos.delete(0, tk.END)
         for s in cursor.fetchall():
-            lista_servicos.insert(tk.END, f"{s[0]} - {s[1]} - {s[2]} - {s[3]} - {s[4]} - {s[5]}")
+            lista_servicos.insert(tk.END, f"{s[0]} - {s[1]} - {s[2]} - {s[3]} - {s[4]} - {s[5]} - {s[6]}")
 
     def selecionar_servico(event):
         try:
             index = lista_servicos.curselection()[0]
-            dados = lista_servicos.get(index).split(" - ", 5)
+            dados = lista_servicos.get(index).split(" - ", 6)
             entry_id.config(state='normal')
             entry_id.delete(0, tk.END)
             entry_id.insert(0, dados[0])
@@ -64,6 +64,8 @@ def tela_servico():
             entry_servico.insert(0, dados[4])
             entry_data.delete(0, tk.END)
             entry_data.insert(0, dados[5])
+            entry_obs.delete(0, tk.END)
+            entry_obs.insert(0, dados[6])
         except IndexError:
             pass
 

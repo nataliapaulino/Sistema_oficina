@@ -40,13 +40,13 @@ def tela_veiculo():
 
     def listar_veiculos():
         cursor.execute('''
-            SELECT v.id, c.nome, v.marca, v.modelo, v.placa, v.ano, v.cor
+            SELECT v.id, c.nome, v.marca, v.modelo, v.placa, v.chassi, v.ano, v.cor
             FROM veiculos v
             JOIN clientes c ON v.cliente_id = c.id
         ''')
         lista_veiculos.delete(0, tk.END)
         for v in cursor.fetchall():
-            lista_veiculos.insert(tk.END, f"{v[0]} - {v[1]} - {v[2]} {v[3]} - {v[4]} - {v[5]} - {v[6]}")
+            lista_veiculos.insert(tk.END, f"{v[0]} - {v[1]} - {v[2]} {v[3]} - {v[4]} - {v[5]} - {v[6]} - {v[7]}")
 
     def selecionar_veiculo(event):
         try:
@@ -62,10 +62,12 @@ def tela_veiculo():
             entry_modelo.insert(0, dados[2].split()[1])
             entry_placa.delete(0, tk.END)
             entry_placa.insert(0, dados[3])
+            entry_chassi.delete(0, tk.END)
+            entry_chassi.insert(0, dados[4])
             entry_ano.delete(0, tk.END)
-            entry_ano.insert(0, dados[4])
+            entry_ano.insert(0, dados[5])
             entry_cor.delete(0, tk.END)
-            entry_cor.insert(0, dados[5])
+            entry_cor.insert(0, dados[6])
         except IndexError:
             pass
 
